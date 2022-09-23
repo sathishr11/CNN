@@ -138,3 +138,7 @@ dmypy.json
 *.jpg
 *.zip
 *logs/
+
+# h5 files
+artifacts/prepare_base_model/base_model.h5
+artifacts/prepare_base_model/base_model_updated.h5
