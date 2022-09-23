@@ -51,4 +51,4 @@ class Logger(Singleton):
         self.logger.addHandler(file_handler)
 
 
-logger = Logger()
+logger = Logger().logger
