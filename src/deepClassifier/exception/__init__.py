@@ -1,22 +1,21 @@
 import os
 import sys
 
-class CustomException(Exception):
-    
-    def __init__(self, error_message:Exception,error_detail):
-        super().__init__(error_message)
-        self.error_message=CustomException.get_detailed_error_message(error_message=error_message,
-                                                                       error_detail=error_detail
-                                                                        )
 
+class CustomException(Exception):
+    def __init__(self, error_message: Exception, error_detail):
+        super().__init__(error_message)
+        self.error_message = CustomException.get_detailed_error_message(
+            error_message=error_message, error_detail=error_detail
+        )
 
     @staticmethod
-    def get_detailed_error_message(error_message:Exception, error_detail)->str:
+    def get_detailed_error_message(error_message: Exception, error_detail) -> str:
         """
         error_message: Exception object
         error_detail: object of sys module
         """
-        _,_ ,exec_tb = error_detail.exc_info()
+        _, _, exec_tb = error_detail.exc_info()
         exception_block_line_number = exec_tb.tb_frame.f_lineno
         try_block_line_number = exec_tb.tb_lineno
         file_name = exec_tb.tb_frame.f_code.co_filename
@@ -30,7 +29,6 @@ class CustomException(Exception):
 
     def __str__(self):
         return self.error_message
-
 
     def __repr__(self) -> str:
         return CustomException.__name__

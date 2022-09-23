@@ -4,10 +4,10 @@ import logging
 import threading
 from datetime import datetime
 
+
 class Singleton:
     _instance = None
     _lock = threading.Lock()
-
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -26,9 +26,8 @@ class Logger(Singleton):
         log_file_name = f'log_{datetime.now().strftime("%Y_%m_%d")}.log'
 
         # create the path for log files
-        log_file_path = os.path.join('logs', log_file_name)
+        log_file_path = os.path.join("logs", log_file_name)
         os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
-
 
         # Create a custom logger
         logging.basicConfig(level=logging.NOTSET)
@@ -41,8 +40,12 @@ class Logger(Singleton):
         file_handler.setLevel(logging.NOTSET)
 
         # Create formatters and add it to handlers
-        terminal_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        file_format = logging.Formatter('%(asctime)s - %(filename)s - %(levelname)s - %(message)s')
+        terminal_format = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
+        file_format = logging.Formatter(
+            "%(asctime)s - %(filename)s - %(levelname)s - %(message)s"
+        )
         terminal_handler.setFormatter(terminal_format)
         file_handler.setFormatter(file_format)
 
