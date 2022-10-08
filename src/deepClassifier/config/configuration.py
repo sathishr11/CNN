@@ -5,8 +5,10 @@ from deepClassifier import Singleton
 from deepClassifier.entity import PrepareBaseModelConfig
 from deepClassifier.entity import PrepareCallbacksConfig
 from deepClassifier.entity import TrainingConfig
+from deepClassifier.entity import EvaluationConfig
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 
 class ConfigurationManager(Singleton):
@@ -16,6 +18,7 @@ class ConfigurationManager(Singleton):
         self.config = read_yaml(config_filepath)
         self.params = read_yaml(params_filepath)
         create_directories([self.config.artifacts_root])
+        load_dotenv()
 
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         config = self.config.data_ingestion
@@ -83,3 +86,15 @@ class ConfigurationManager(Singleton):
         )
 
         return training_config
+    
+    def get_validation_config(self) -> EvaluationConfig:
+        evalution = self.config.evalution
+        eval_config = EvaluationConfig(
+            path_of_model=Path(evalution.model_path),
+            training_data=Path(evalution.training_data),
+            mlflow_uri=os.environ["MLFLOW_TRACKING_URI"],
+            all_params=self.params,
+            params_image_size=self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+        return eval_config
