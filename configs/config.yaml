@@ -23,3 +23,8 @@ prepare_callbacks:
 training:
   root_dir: artifacts/training
   trained_model_path: artifacts/training/model.h5
+
+
+evaluation:
+  model_path: artifacts/training/model.h5
+  training_data: artifacts/data_ingestion/PetImages
