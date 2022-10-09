@@ -88,10 +88,10 @@ class ConfigurationManager(Singleton):
         return training_config
     
     def get_validation_config(self) -> EvaluationConfig:
-        evalution = self.config.evalution
+        evaluation = self.config.evaluation
         eval_config = EvaluationConfig(
-            path_of_model=Path(evalution.model_path),
-            training_data=Path(evalution.training_data),
+            path_of_model=Path(evaluation.model_path),
+            training_data=Path(evaluation.training_data),
             mlflow_uri=os.environ["MLFLOW_TRACKING_URI"],
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
