@@ -14,6 +14,7 @@ types-PyYAML
 scipy
 mlflow
 streamlit
+python-dotenv
 -e .
 
 ## Dev requirements
