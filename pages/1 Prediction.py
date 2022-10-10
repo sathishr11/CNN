@@ -3,14 +3,15 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 import os
-from dotenv import load_dotenv
 
 
 
 model_name = "DogCatClassifier"
 stage = "Production"
 
-load_dotenv()
+os.environ["MLFLOW_TRACKING_URI"] = st.secrets["MLFLOW_TRACKING_URI"]
+os.environ["MLFLOW_TRACKING_USERNAME"] = st.secrets["MLFLOW_TRACKING_USERNAME"]
+os.environ["MLFLOW_TRACKING_PASSWORD"] = st.secrets["MLFLOW_TRACKING_PASSWORD"]
 mlflow.set_registry_uri(os.environ["MLFLOW_TRACKING_URI"])
 model_mlflow = mlflow.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{stage}"
