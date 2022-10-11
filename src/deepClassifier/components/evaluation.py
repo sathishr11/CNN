@@ -86,11 +86,5 @@ class Evaluation:
                 model_uri = "runs:/{}/model".format(run.info.run_id)
                 model_details = mlflow.register_model(model_uri, "DogCatClassifier")
                 self._wait_until_ready(model_details.name, model_details.version)
-                client = MlflowClient()
-                client.update_model_version(
-                    name=model_details.name,
-                    version=model_details.version,
-                    description="VGG16 model"
-                    )
             else:
                 mlflow.keras.log_model(self.model, "model")
